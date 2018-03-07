@@ -8,38 +8,44 @@ $(function () {
 	let c2d = can.getContext('2d')
 	let img = new Image()
     img.crossOrigin = "Anonymous"
-	img.src = 'wly.png'
+	img.src = 'sjw4.png'
 
     img.onload = function () {
     	window.$width = img.width
     	window.$height = img.height
         let scale = $height * (width / $width)
     	
-    	c2d.drawImage(img, 0, 0, $width, $height, 0, 0, width, height)
+    	c2d.drawImage(img, 0, 0, $width, $height, 0, 0, width, height )
     	let datas = c2d.getImageData(0, 0, width, height).data
     	let data = []
     	let fill = '#fff'
-      	for (let i = 1; i < width; i += 1) {
-        	for (let j = 1; j < height; j += 1) {
-        		let index = ((j - 1) * width + (i - 1)) * 4
-        		if (datas[index + 0] <= 255 && datas[index + 0] > 245) {
-        			fill = '#d6d6d6'
+      	for (let i = 0; i < width; i += 1) {
+        	for (let j = 0; j < height; j += 1) {
+        		let index = ((j) * width + (i)) * 4
+                if (datas[index + 0] <= 255 && datas[index + 0] > 249) {
+                    fill = '#d6d6d6'
                     continue
+                } else if (datas[index + 0] < 249 && datas[index + 0] > 245) {
+        			fill = '#d8d8d8'
         		} else if (datas[index + 0] < 245 && datas[index + 0] > 230) {
                     fill = '#d6d6d6'
                 } else if (datas[index + 0] < 230 && datas[index + 0] > 220) {
                     fill = '#e0e0e0'
-                } else if (datas[index + 0] < 220 && datas[index + 0] > 80) {
-        			fill = '#d5d5d5'
-        		} else if (datas[index + 0] < 220 && datas[index + 0] > 160) {
-        			fill = '#9e9e9e'
-        		} else if (datas[index + 0] < 160 && datas[index + 0] > 140) {
+                } else if (datas[index + 0] < 220 && datas[index + 0] > 195) {
+        			fill = '#d9d9d9'
+        		} else if (datas[index + 0] < 195 && datas[index + 0] > 180) {
+        			fill = '#b8b8b8'
+        		} else if (datas[index + 0] < 180 && datas[index + 0] > 160) {
+                    fill = '#9e9e9e'
+                } else if (datas[index + 0] < 160 && datas[index + 0] > 140) {
         			fill = '#919191'
         		} else if (datas[index + 0] < 140 && datas[index + 0] > 120) {
         			fill = '#727272'
-        		} else if (datas[index + 0] < 120 && datas[index + 0] > 80) {
+        		} else if (datas[index + 0] < 120 && datas[index + 0] > 100) {
         			fill = '#6f6f6f'
-        		} else if (datas[index + 0] < 80 && datas[index + 0] > 50) {
+        		}  else if (datas[index + 0] < 100 && datas[index + 0] > 80) {
+                    fill = '#575757'
+                }  else if (datas[index + 0] < 80 && datas[index + 0] > 50) {
         			fill = '#1d1d1d'
         		} else {
         			fill = '#000'
