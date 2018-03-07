@@ -1,6 +1,7 @@
 $(function () {
 	let width = $(window).width()
 	let height = $(window).height()
+    console.log(width, height)
 	let can = $('#canvas')[0]
 	can.width = width
 	can.height = height
@@ -8,6 +9,8 @@ $(function () {
 	let img = new Image()
     img.crossOrigin = "Anonymous"
 	img.src = 'wly.png'
+    img.width = width
+    console.log(img)
 
 	// data定义宽高，居中放置
 	// var data = {
@@ -72,7 +75,6 @@ $(function () {
             }, 1500)
           }, 1000)  
         }
-        // draw()
         function draw () {
         	c2d.clearRect(0, 0, width, height)
         	let currX = 0 // 粒子位置x
