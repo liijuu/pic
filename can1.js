@@ -8,7 +8,7 @@ $(function () {
 	let c2d = can.getContext('2d')
 	let img = new Image()
     img.crossOrigin = "Anonymous"
-	img.src = 'sjw4.png'
+	img.src = 'sjw9.png'
 
     img.onload = function () {
     	window.$width = img.width
@@ -50,9 +50,12 @@ $(function () {
         		} else {
         			fill = '#000'
         		}
+                let a ={
+
+                }
         		data.push({
-	              x0: parseInt(width / 2),
-	              y0: height,
+	              x0: Math.random()>.5? 0 : width,
+                  y0: height,
 	              X: 0 + i + (Math.random() - 0.5) * 1, // 终点x坐标
 	              Y: 0 + j + (Math.random() - 0.5) * 1, // 终点y坐标
 	              // count: 0,
@@ -95,13 +98,13 @@ $(function () {
                         currX = Math.easeInOutQuad(cur - dal, data[i].x0, data[i].X - data[i].x0, dur)
                         currY = Math.easeInOutQuad(cur - dal, data[i].y0, data[i].Y - data[i].y0, dur)
                         c2d.fillRect(currX, currY, 1, 1)
-                        data[i].currTime += Math.random() + 2
+                        data[i].currTime += Math.random() + 1
                     } else {
                         c2d.fillRect(data[i].X, data[i].Y, 1, 1)
                     }
 
                 } else {
-                    data[i].currTime += Math.random() + 2
+                    data[i].currTime += Math.random() + 1
                 }
         	}
         	window.gg = requestAnimationFrame(draw)
