@@ -9,26 +9,19 @@ $(function () {
 	let img = new Image()
     img.crossOrigin = "Anonymous"
 	img.src = 'wly.png'
-    img.width = width
-    console.log(img)
 
-	// data定义宽高，居中放置
-	// var data = {
- //      dx: img.width,
- //      dy: img.height,
- //      ds: parseInt(($(window).width() - img.width) / 2)
- //    }
     img.onload = function () {
     	window.$width = img.width
     	window.$height = img.height
-    	// console.log(data.dx, data.dy, img.width, img.height)
-    	c2d.drawImage(img, 0, 0, $width, $height, parseInt(($(window).width() - $width) / 2), 0, $width, $height)
-    	let datas = c2d.getImageData(parseInt(($(window).width() - $width) / 2), 0, $width, $height).data
+        let scale = $height * (width / $width)
+    	
+    	c2d.drawImage(img, 0, 0, $width, $height, 0, 0, width, height)
+    	let datas = c2d.getImageData(0, 0, width, height).data
     	let data = []
     	let fill = '#fff'
-      	for (let i = 1; i < $width; i += 1) {
-        	for (let j = 1; j < $height; j += 1) {
-        		let index = ((j - 1) * $width + (i - 1)) * 4
+      	for (let i = 1; i < width; i += 1) {
+        	for (let j = 1; j < height; j += 1) {
+        		let index = ((j - 1) * width + (i - 1)) * 4
         		if (datas[index + 0] <= 255 && datas[index + 0] > 245) {
         			fill = '#d6d6d6'
                     continue
@@ -54,7 +47,7 @@ $(function () {
         		data.push({
 	              x0: parseInt(width / 2),
 	              y0: height,
-	              X: parseInt((width - $width) / 2) + i + (Math.random() - 0.5) * 1, // 终点x坐标
+	              X: 0 + i + (Math.random() - 0.5) * 1, // 终点x坐标
 	              Y: 0 + j + (Math.random() - 0.5) * 1, // 终点y坐标
 	              // count: 0,
 	              delay: j / 6, // 每一行开始延时，进去之后才能触发里面的函数
@@ -72,7 +65,7 @@ $(function () {
             $('#imgg').addClass('bounceOutDown');
             setTimeout(function () {
                 draw()
-            }, 1500)
+            }, 1200)
           }, 1000)  
         }
         function draw () {
@@ -85,25 +78,25 @@ $(function () {
         		var dal = data[i].delay
         		var cur = data[i].currTime
         		c2d.fillStyle = data[i].fill
-        		if (cur > dal) { // 当前时间大于延迟，开始
-        			if (data[data.length - 1].delay + data[data.length - 1].duration < data[data.length - 1].currTime) {
-                        console.log('jiesu')
-        				cancelAnimationFrame(window.gg)
-                        end()
-        				return
-        			} else {
-        				if (cur < dur + dal) {
-        					currX = Math.easeInOutQuad(cur - dal, data[i].x0, data[i].X - data[i].x0, dur)
-			                currY = Math.easeInOutQuad(cur - dal, data[i].y0, data[i].Y - data[i].y0, dur)
-			                c2d.fillRect(currX, currY, 1, 1)
-                            data[i].currTime += Math.random() + 2
-        				} else {
-        					c2d.fillRect(data[i].X, data[i].Y, 1, 1)
-        				}
-        			}
-        		} else {
-        			data[i].currTime += Math.random() + 2
-        		}
+                if (data[data.length - 1].delay + data[data.length - 1].duration < data[data.length - 1].currTime) {
+                    console.log('jiesu')
+                    cancelAnimationFrame(window.gg)
+                    end()
+                    return
+                }
+                if (cur > dal) {
+                    if (cur < dal + dur) {
+                        currX = Math.easeInOutQuad(cur - dal, data[i].x0, data[i].X - data[i].x0, dur)
+                        currY = Math.easeInOutQuad(cur - dal, data[i].y0, data[i].Y - data[i].y0, dur)
+                        c2d.fillRect(currX, currY, 1, 1)
+                        data[i].currTime += Math.random() + 2
+                    } else {
+                        c2d.fillRect(data[i].X, data[i].Y, 1, 1)
+                    }
+
+                } else {
+                    data[i].currTime += Math.random() + 2
+                }
         	}
         	window.gg = requestAnimationFrame(draw)
         }
