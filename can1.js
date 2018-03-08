@@ -21,6 +21,9 @@ $(function () {
       	for (let i = 0; i < width; i += 1) {
         	for (let j = 0; j < height; j += 1) {
         		let index = ((j) * width + (i)) * 4
+                if (datas[index + 0] > 245) {
+                    continue
+                }
                 fill = `rgba(${datas[index + 0]}, ${datas[index + 1]}, ${datas[index + 2]}, ${datas[index + 3]})`
         		data.push({
 	              x0: Math.random()>.5? 0 : width,
@@ -36,6 +39,7 @@ $(function () {
 	            })
         	}
         }
+        console.log(data.length)
         pic()
         function pic () {
           c2d.clearRect(0, 0, width, height);
