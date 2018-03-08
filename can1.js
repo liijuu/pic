@@ -10,6 +10,7 @@ $(function () {
     let say = ['德清最美', '杭州最美', '浙江最美', '中国最美', '亚洲最美', '地球最美', '太阳系最美', ]
     ggggg = 0
 	img.src = imgs[ggggg % 7]
+    let flag = false
 
     if (window.DeviceMotionEvent) {
         window.addEventListener('devicemotion', deviceMotionHandler)
@@ -28,10 +29,9 @@ $(function () {
             z = acceleration.z;
             var speed = Math.abs(x +y + z - last_x - last_y - last_z) / diffTime * 10000;
             if (speed > SHAKE_THRESHOLD) {
-                if （window.gg）{
+                if (window.gg) {
                     cancelAnimationFrame(window.gg)
                 }
-                end()
                 alert(say[ggggg % 7])
                 ggggg ++
                 img.src = imgs[ggggg % 7]
@@ -42,9 +42,10 @@ $(function () {
        }
     }
     // $('#canvas').click(function () {
-    //     if （window.gg）{
+    //     if(window.gg){
     //         cancelAnimationFrame(window.gg)
     //     }
+    //     c2d.clearRect(0, 0, width, height)
     //     alert(say[ggggg % 7])
     //     ggggg ++
     //     img.src = imgs[ggggg % 7]
@@ -66,6 +67,9 @@ $(function () {
                 if (datas[index + 0] > 240) {
                     continue
                 }
+                if (Math.random() > .88) {
+                    continue
+                }
                 fill = `rgba(${datas[index + 0]}, ${datas[index + 1]}, ${datas[index + 2]}, ${datas[index + 3]})`
         		data.push({
 	              x0: (ggggg%2) == 1? width/2 : Math.random() > .5? 0 : width,
@@ -73,7 +77,7 @@ $(function () {
 	              X: 0 + i + (Math.random() - 0.5) * 1, // 终点x坐标
 	              Y: 0 + j + (Math.random() - 0.5) * 1, // 终点y坐标
 	              // count: 0,
-	              delay: j < 480? j/8 : 480/8, // 每一行开始延时，进去之后才能触发里面的函数
+	              delay: j < 450? j/6 : 450/6, // 每一行开始延时，进去之后才能触发里面的函数
 	              fill: fill,
 	              duration: 16, // 动画持续时间
 	              interval: parseInt(Math.random() * 10 * 3), // 粒子自带动画延时
@@ -86,9 +90,16 @@ $(function () {
           c2d.clearRect(0, 0, width, height);
           setTimeout(function () {
             $('#imgg').addClass('bounceOutDown');
-            setTimeout(function () {
-                draw()
-            }, 1000)
+            if (!flag) {
+                setTimeout(function () {
+                    flag = true
+                    draw()
+                }, 1000)
+            } else {
+                setTimeout(function () {
+                    draw()
+                }, 60)
+            }
           }, 1000)  
         }
         function draw () {
