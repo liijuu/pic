@@ -1,5 +1,7 @@
 $(function () {
-    console.log('本地的')
+    window.onerror = (err) => {
+        console.log(err)
+    }
 	let width = $(window).width()
 	let height = $(window).height()
 	let can = $('#canvas')[0]
@@ -10,7 +12,7 @@ $(function () {
     let imgs = ['sjw7.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw9.png','sjw8.png']
     let say = ['德清最美', '杭州最美', '浙江最美', '中国最美', '亚洲最美', '地球最美', '太阳系最美', ]
     ggggg = 0
-	img.src = imgs[ggggg % 7]
+	img.src = imgs[ggggg % 7])
     let flag = false
 
     if (window.DeviceMotionEvent) {
@@ -88,20 +90,18 @@ $(function () {
         }
         pic()
         function pic () {
-          c2d.clearRect(0, 0, width, height);
-          setTimeout(function () {
-            $('#imgg').addClass('bounceOutDown');
+            c2d.clearRect(0, 0, width, height);
             if (!flag) {
                 setTimeout(function () {
-                    flag = true
-                    draw()
+                    $('#imgg').addClass('bounceOutDown')
+                    setTimeout(function () {
+                        flag = true
+                        draw()
+                    }, 1000)
                 }, 1000)
-            } else {
-                setTimeout(function () {
-                    draw()
-                }, 60)
-            }
-          }, 1000)  
+            }  else {
+                draw()
+            } 
         }
         function draw () {
         	c2d.clearRect(0, 0, width, height)
