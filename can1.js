@@ -1,14 +1,13 @@
 $(function () {
 	let width = $(window).width()
 	let height = $(window).height()
-    console.log(width, height)
 	let can = $('#canvas')[0]
 	can.width = width
 	can.height = height
 	let c2d = can.getContext('2d')
 	let img = new Image()
     img.crossOrigin = "Anonymous"
-	img.src = 'sjw9.png'
+	img.src = 'sjw10.png'
 
     img.onload = function () {
     	window.$width = img.width
@@ -18,48 +17,18 @@ $(function () {
     	c2d.drawImage(img, 0, 0, $width, $height, 0, 0, width, height )
     	let datas = c2d.getImageData(0, 0, width, height).data
     	let data = []
-    	let fill = '#fff'
+    	let fill = ''
       	for (let i = 0; i < width; i += 1) {
         	for (let j = 0; j < height; j += 1) {
         		let index = ((j) * width + (i)) * 4
-                if (datas[index + 0] <= 255 && datas[index + 0] > 249) {
-                    fill = '#d6d6d6'
-                    continue
-                } else if (datas[index + 0] < 249 && datas[index + 0] > 245) {
-        			fill = '#d8d8d8'
-        		} else if (datas[index + 0] < 245 && datas[index + 0] > 230) {
-                    fill = '#d6d6d6'
-                } else if (datas[index + 0] < 230 && datas[index + 0] > 220) {
-                    fill = '#e0e0e0'
-                } else if (datas[index + 0] < 220 && datas[index + 0] > 195) {
-        			fill = '#d9d9d9'
-        		} else if (datas[index + 0] < 195 && datas[index + 0] > 180) {
-        			fill = '#b8b8b8'
-        		} else if (datas[index + 0] < 180 && datas[index + 0] > 160) {
-                    fill = '#9e9e9e'
-                } else if (datas[index + 0] < 160 && datas[index + 0] > 140) {
-        			fill = '#919191'
-        		} else if (datas[index + 0] < 140 && datas[index + 0] > 120) {
-        			fill = '#727272'
-        		} else if (datas[index + 0] < 120 && datas[index + 0] > 100) {
-        			fill = '#6f6f6f'
-        		}  else if (datas[index + 0] < 100 && datas[index + 0] > 80) {
-                    fill = '#575757'
-                }  else if (datas[index + 0] < 80 && datas[index + 0] > 50) {
-        			fill = '#1d1d1d'
-        		} else {
-        			fill = '#000'
-        		}
-                let a ={
-
-                }
+                fill = `rgba(${datas[index + 0]}, ${datas[index + 1]}, ${datas[index + 2]}, ${datas[index + 3]})`
         		data.push({
 	              x0: Math.random()>.5? 0 : width,
                   y0: height,
 	              X: 0 + i + (Math.random() - 0.5) * 1, // 终点x坐标
 	              Y: 0 + j + (Math.random() - 0.5) * 1, // 终点y坐标
 	              // count: 0,
-	              delay: j / 6, // 每一行开始延时，进去之后才能触发里面的函数
+	              delay: j / 5, // 每一行开始延时，进去之后才能触发里面的函数
 	              fill: fill,
 	              duration: 16, // 动画持续时间
 	              interval: parseInt(Math.random() * 10 * 3), // 粒子自带动画延时
