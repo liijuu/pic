@@ -28,7 +28,7 @@ $(function () {
             z = acceleration.z;
             var speed = Math.abs(x +y + z - last_x - last_y - last_z) / diffTime * 10000;
             if (speed > SHAKE_THRESHOLD) {
-                alert(says[ggggg % 7])
+                alert(say[ggggg % 7])
                 ggggg ++
                 img.src = imgs[ggggg % 7]
             }
