@@ -6,8 +6,35 @@ $(function () {
 	can.height = height
 	let c2d = can.getContext('2d')
 	let img = new Image()
-    img.crossOrigin = "Anonymous"
-	img.src = 'sjw10.png'
+    let imgs = ['sjw9.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw7.png','sjw8.png']
+    ggggg = 0
+	img.src = imgs[ggggg % 7]
+
+    if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', deviceMotionHandler)
+        }
+    var SHAKE_THRESHOLD = 3000
+    var last_update = 0
+    var x, y, z, last_x = 0, last_y = 0, last_z = 0
+    function deviceMotionHandler(eventData) {
+        var acceleration =eventData.accelerationIncludingGravity;
+        var curTime = new Date().getTime();
+        if ((curTime-last_update)> 10) {
+            var diffTime = curTime -last_update;
+            last_update = curTime;
+            x = acceleration.x;
+            y = acceleration.y;
+            z = acceleration.z;
+            var speed = Math.abs(x +y + z - last_x - last_y - last_z) / diffTime * 10000;
+            if (speed > SHAKE_THRESHOLD) {
+               ggggg ++
+            }
+            last_x = x;
+            last_y = y;
+            last_z = z;
+       }
+    }
+
 
     img.onload = function () {
     	window.$width = img.width
@@ -26,7 +53,7 @@ $(function () {
                 }
                 fill = `rgba(${datas[index + 0]}, ${datas[index + 1]}, ${datas[index + 2]}, ${datas[index + 3]})`
         		data.push({
-	              x0: width/2,
+	              x0: (ggggg%2) == 1? width/2 : Math.random() > .5? 0 : width,
                   y0: height,
 	              X: 0 + i + (Math.random() - 0.5) * 1, // 终点x坐标
 	              Y: 0 + j + (Math.random() - 0.5) * 1, // 终点y坐标
@@ -39,7 +66,6 @@ $(function () {
 	            })
         	}
         }
-        console.log(data.length)
         pic()
         function pic () {
           c2d.clearRect(0, 0, width, height);
