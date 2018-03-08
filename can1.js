@@ -7,11 +7,11 @@ $(function () {
 	let c2d = can.getContext('2d')
 	let img = new Image()
     let imgs = ['sjw9.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw7.png','sjw8.png']
+    let say = ['德清最美', '杭州最美', '浙江最美', '中国最美', '亚洲最美', '地球最美', '太阳系最美', ]
     ggggg = 0
 	img.src = imgs[ggggg % 7]
 
     if (window.DeviceMotionEvent) {
-        alert('have')
         window.addEventListener('devicemotion', deviceMotionHandler)
     }
     var SHAKE_THRESHOLD = 4000
@@ -28,8 +28,9 @@ $(function () {
             z = acceleration.z;
             var speed = Math.abs(x +y + z - last_x - last_y - last_z) / diffTime * 10000;
             if (speed > SHAKE_THRESHOLD) {
-                alert('ggg')
+                alert(says[ggggg % 7])
                 ggggg ++
+                img.src = imgs[ggggg % 7]
             }
             last_x = x;
             last_y = y;
