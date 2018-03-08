@@ -6,37 +6,42 @@ $(function () {
 	can.height = height
 	let c2d = can.getContext('2d')
 	let img = new Image()
-    let imgs = ['sjw9.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw7.png','sjw8.png']
+    let imgs = ['sjw7.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw9.png','sjw8.png']
     let say = ['德清最美', '杭州最美', '浙江最美', '中国最美', '亚洲最美', '地球最美', '太阳系最美', ]
     ggggg = 0
 	img.src = imgs[ggggg % 7]
 
-    if (window.DeviceMotionEvent) {
-        window.addEventListener('devicemotion', deviceMotionHandler)
-    }
-    var SHAKE_THRESHOLD = 4000
-    var last_update = 0
-    var x, y, z, last_x = 0, last_y = 0, last_z = 0
-    function deviceMotionHandler(eventData) {
-        var acceleration =eventData.accelerationIncludingGravity;
-        var curTime = new Date().getTime();
-        if ((curTime-last_update)> 10) {
-            var diffTime = curTime -last_update;
-            last_update = curTime;
-            x = acceleration.x;
-            y = acceleration.y;
-            z = acceleration.z;
-            var speed = Math.abs(x +y + z - last_x - last_y - last_z) / diffTime * 10000;
-            if (speed > SHAKE_THRESHOLD) {
-                alert(say[ggggg % 7])
-                ggggg ++
-                img.src = imgs[ggggg % 7]
-            }
-            last_x = x;
-            last_y = y;
-            last_z = z;
-       }
-    }
+    // if (window.DeviceMotionEvent) {
+    //     window.addEventListener('devicemotion', deviceMotionHandler)
+    // }
+    // var SHAKE_THRESHOLD = 4000
+    // var last_update = 0
+    // var x, y, z, last_x = 0, last_y = 0, last_z = 0
+    // function deviceMotionHandler(eventData) {
+    //     var acceleration =eventData.accelerationIncludingGravity;
+    //     var curTime = new Date().getTime();
+    //     if ((curTime-last_update)> 10) {
+    //         var diffTime = curTime -last_update;
+    //         last_update = curTime;
+    //         x = acceleration.x;
+    //         y = acceleration.y;
+    //         z = acceleration.z;
+    //         var speed = Math.abs(x +y + z - last_x - last_y - last_z) / diffTime * 10000;
+    //         if (speed > SHAKE_THRESHOLD) {
+    //             alert(say[ggggg % 7])
+    //             ggggg ++
+    //             img.src = imgs[ggggg % 7]
+    //         }
+    //         last_x = x;
+    //         last_y = y;
+    //         last_z = z;
+    //    }
+    // }
+    $('#canvas').click(function () {
+        alert(say[ggggg % 7])
+        ggggg ++
+        img.src = imgs[ggggg % 7]
+    })
 
 
     img.onload = function () {
@@ -76,7 +81,7 @@ $(function () {
             $('#imgg').addClass('bounceOutDown');
             setTimeout(function () {
                 draw()
-            }, 1200)
+            }, 1000)
           }, 1000)  
         }
         function draw () {
