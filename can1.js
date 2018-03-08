@@ -21,17 +21,17 @@ $(function () {
       	for (let i = 0; i < width; i += 1) {
         	for (let j = 0; j < height; j += 1) {
         		let index = ((j) * width + (i)) * 4
-                if (datas[index + 0] > 245) {
+                if (datas[index + 0] > 240) {
                     continue
                 }
                 fill = `rgba(${datas[index + 0]}, ${datas[index + 1]}, ${datas[index + 2]}, ${datas[index + 3]})`
         		data.push({
-	              x0: Math.random()>.5? 0 : width,
+	              x0: width/2,
                   y0: height,
 	              X: 0 + i + (Math.random() - 0.5) * 1, // 终点x坐标
 	              Y: 0 + j + (Math.random() - 0.5) * 1, // 终点y坐标
 	              // count: 0,
-	              delay: j / 5, // 每一行开始延时，进去之后才能触发里面的函数
+	              delay: j < 480? j/8 : 480/8, // 每一行开始延时，进去之后才能触发里面的函数
 	              fill: fill,
 	              duration: 16, // 动画持续时间
 	              interval: parseInt(Math.random() * 10 * 3), // 粒子自带动画延时
