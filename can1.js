@@ -1,4 +1,5 @@
 $(function () {
+    console.log('本地的')
 	let width = $(window).width()
 	let height = $(window).height()
 	let can = $('#canvas')[0]
