@@ -12,7 +12,7 @@ $(function () {
     let imgs = ['sjw7.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw9.png','sjw8.png']
     let say = ['德清最美', '杭州最美', '浙江最美', '中国最美', '亚洲最美', '地球最美', '太阳系最美', ]
     ggggg = 0
-	img.src = imgs[ggggg % 7])
+	img.src = imgs[ggggg % 7]
     let flag = false
 
     if (window.DeviceMotionEvent) {
