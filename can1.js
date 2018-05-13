@@ -11,7 +11,7 @@ $(function () {
 	let img = new Image()
     // let imgs = ['sjw7.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw9.png','sjw8.png']
     // ggggg = 00
-	img.src = 'xu2.png'
+	img.src = 'xu1.png'
     let flag = false
 
 
@@ -30,9 +30,9 @@ $(function () {
                 if (datas[index + 0] > 220 && datas[index + 1] > 220 && datas[index + 2] > 220) {
                     continue
                 }
-                if (Math.random() > .9) {
-                    continue
-                }
+                // if (Math.random() > .97) {
+                //     continue
+                // }
                 fill = `rgba(${datas[index + 0]}, ${datas[index + 1]}, ${datas[index + 2]}, ${datas[index + 3]})`
         		data.push({
 	              x0: width/2,
@@ -81,13 +81,13 @@ $(function () {
                         currX = Math.easeInOutQuad(cur - dal, data[i].x0, data[i].X - data[i].x0, dur)
                         currY = Math.easeInOutQuad(cur - dal, data[i].y0, data[i].Y - data[i].y0, dur)
                         c2d.fillRect(currX, currY, 1, 1)
-                        data[i].currTime += Math.random() + .3
+                        data[i].currTime += Math.random() + 1.8
                     } else {
                         c2d.fillRect(data[i].X, data[i].Y, 1, 1)
                     }
 
                 } else {
-                    data[i].currTime += Math.random() + .3
+                    data[i].currTime += Math.random() + 1.8
                 }
         	}
         	window.gg = requestAnimationFrame(draw)
