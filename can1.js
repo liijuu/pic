@@ -10,7 +10,7 @@ $(function () {
 	let c2d = can.getContext('2d')
 	let img = new Image()
     // let imgs = ['sjw7.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw9.png','sjw8.png']
-    // ggggg = 0 0
+    // ggggg = 00
 	img.src = 'sjw7.png'
     let flag = false
 
