@@ -11,7 +11,7 @@ $(function () {
 	let img = new Image()
     // let imgs = ['sjw7.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw9.png','sjw8.png']
     // ggggg = 00
-	img.src = 'sjw7.png'
+	img.src = 'xu1.png'
     let flag = false
 
 
