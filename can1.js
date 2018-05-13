@@ -11,7 +11,7 @@ $(function () {
 	let img = new Image()
     // let imgs = ['sjw7.png', 'sjw10.png', 'sjw4.png', 'sjw5.png','sjw6.png','sjw9.png','sjw8.png']
     // ggggg = 00
-	img.src = 'xu1.png'
+	img.src = 'xu2.png'
     let flag = false
 
 
@@ -27,10 +27,10 @@ $(function () {
       	for (let i = 0; i < width; i += 1) {
         	for (let j = 0; j < height; j += 1) {
         		let index = ((j) * width + (i)) * 4
-                if (datas[index + 0] > 240) {
+                if (datas[index + 0] > 220 && datas[index + 1] > 220 && datas[index + 2] > 220) {
                     continue
                 }
-                if (Math.random() > 94) {
+                if (Math.random() > .9) {
                     continue
                 }
                 fill = `rgba(${datas[index + 0]}, ${datas[index + 1]}, ${datas[index + 2]}, ${datas[index + 3]})`
@@ -40,7 +40,7 @@ $(function () {
 	              X: 0 + i + (Math.random() - 0.5) * 1, // 终点x坐标
 	              Y: 0 + j + (Math.random() - 0.5) * 1, // 终点y坐标
 	              // count: 0,
-	              delay: j < 450? j/6 : 450/6, // 每一行开始延时，进去之后才能触发里面的函数
+	              delay: j < 480? j/6 : 480/6, // 每一行开始延时，进去之后才能触发里面的函数
 	              fill: fill,
 	              duration: 16, // 动画持续时间
 	              interval: parseInt(Math.random() * 10 * 3), // 粒子自带动画延时
@@ -48,6 +48,7 @@ $(function () {
 	            })
         	}
         }
+        console.log(data.length)
         pic()
         function pic () {
             c2d.clearRect(0, 0, width, height);
@@ -80,13 +81,13 @@ $(function () {
                         currX = Math.easeInOutQuad(cur - dal, data[i].x0, data[i].X - data[i].x0, dur)
                         currY = Math.easeInOutQuad(cur - dal, data[i].y0, data[i].Y - data[i].y0, dur)
                         c2d.fillRect(currX, currY, 1, 1)
-                        data[i].currTime += Math.random() + 1
+                        data[i].currTime += Math.random() + .3
                     } else {
                         c2d.fillRect(data[i].X, data[i].Y, 1, 1)
                     }
 
                 } else {
-                    data[i].currTime += Math.random() + 1
+                    data[i].currTime += Math.random() + .3
                 }
         	}
         	window.gg = requestAnimationFrame(draw)
